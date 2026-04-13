@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Skill workspace/testing artifacts
+*-workspace/
+iteration-*/
+evals/
+feedback.json
+benchmark.json
+timing.json
+
+# Packaged skills (build artifacts, not source)
+*.skill
+
+# Python
+__pycache__/
+*.pyc
+.env
