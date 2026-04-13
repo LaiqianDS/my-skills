@@ -49,7 +49,7 @@ skill-name/
 
 ## Contributing
 
-If you find a bug or want to suggest an improvement to a skill, open an issue. PRs welcome for fixes. If you want to add a new skill, open an issue first to discuss scope.
+If you find a bug or want to suggest an improvement to a skill, open an issue. PRs welcome for fixes. If you want to add a new skill, open an issue first to discuss scope. Please review our [Contribution Guidelines](CONTRIBUTING.md) to get started with creating a new skill using the provided `_template/`.
 
 ## License
 
