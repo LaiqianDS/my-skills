@@ -1,0 +1,26 @@
+name: Validate skills
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Pinned on purpose. --strict fails on issues the runtime tolerates, so an
+      # unpinned CLI can break a pull request that changed nothing. Bump by hand.
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code@2.1.240
+
+      - name: Validate marketplace and plugin manifests
+        run: claude plugin validate . --strict
+
+      - name: Validate skill frontmatter
+        run: claude plugin validate skills --strict
+
+      - name: Check skill names match directories
+        run: python3 scripts/check_skill_names.py
