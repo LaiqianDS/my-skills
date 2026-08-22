@@ -8,6 +8,7 @@ Skills are modular instruction packages that extend Claude's capabilities on spe
 
 | Skill | Description |
 |-------|-------------|
+| [atomic-habits](./atomic-habits/) | Design, diagnose, or repair a habit with the Atomic Habits framework. Finds the broken stage of the habit loop before prescribing, and answers with environment changes rather than willpower. |
 | [cold-email](./cold-email/) | Generate cold emails, DMs, and follow-up sequences with a proven 40%+ reply rate framework. Handles B2B outreach, investor emails, job pitches, scholarship asks, and networking. |
 
 ## Installation
