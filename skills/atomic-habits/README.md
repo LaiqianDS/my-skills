@@ -50,7 +50,12 @@ The procedure sits above the reference on purpose: reference placed first buries
 **Claude Code**:
 
 ```bash
-ln -s $(pwd)/my-skills/atomic-habits ~/.claude/skills/atomic-habits
+# The whole collection
+claude plugin marketplace add LaiqianDS/laiqiands-skills
+claude plugin install laiqiands-skills@laiqiands
+
+# Or this skill alone, from a clone
+ln -s "$PWD/laiqiands-skills/skills/atomic-habits" ~/.claude/skills/atomic-habits
 ```
 
 ## Credits

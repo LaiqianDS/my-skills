@@ -20,15 +20,15 @@ This repository is a Claude Code marketplace.
 Installing the plugin brings in every skill at once, and `/plugin update` keeps them current.
 
 ```bash
-claude plugin marketplace add LaiqianDS/my-skills
+claude plugin marketplace add LaiqianDS/laiqiands-skills
 claude plugin install laiqiands-skills@laiqiands
 ```
 
 To install a single skill instead, symlink it into `~/.claude/skills/`:
 
 ```bash
-git clone https://github.com/LaiqianDS/my-skills.git
-ln -s "$PWD/my-skills/skills/cold-email" ~/.claude/skills/cold-email
+git clone https://github.com/LaiqianDS/laiqiands-skills.git
+ln -s "$PWD/laiqiands-skills/skills/cold-email" ~/.claude/skills/cold-email
 ```
 
 ### Claude.ai
@@ -47,7 +47,7 @@ See [Skills API docs](https://docs.claude.com) for integration details.
 ## Repository Structure
 
 ```
-my-skills/
+laiqiands-skills/
 ├── .claude-plugin/
 │   ├── marketplace.json   # Marketplace manifest
 │   └── plugin.json        # Plugin manifest. Skills are auto-discovered from skills/
