@@ -1,0 +1,23 @@
+{
+  "name": "laiqiands",
+  "owner": {
+    "name": "Laiqian Ji",
+    "url": "https://github.com/LaiqianDS"
+  },
+  "description": "Laiqian Ji's personal collection of Claude skills, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "laiqiands-skills",
+      "source": "./",
+      "description": "A wide range of agent skills for daily use.",
+      "category": "productivity",
+      "keywords": [
+        "skills",
+        "productivity",
+        "daily-use",
+        "writing",
+        "personal"
+      ]
+    }
+  ]
+}

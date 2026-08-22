@@ -1,0 +1,19 @@
+{
+  "name": "laiqiands-skills",
+  "version": "0.1.0",
+  "description": "A wide range of agent skills for daily use.",
+  "author": {
+    "name": "Laiqian Ji",
+    "url": "https://github.com/LaiqianDS"
+  },
+  "homepage": "https://github.com/LaiqianDS/my-skills",
+  "repository": "https://github.com/LaiqianDS/my-skills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "productivity",
+    "daily-use",
+    "writing",
+    "personal"
+  ]
+}
