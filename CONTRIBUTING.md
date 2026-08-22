@@ -1,6 +1,7 @@
 # Contributing to Claude Skills
 
-Thank you for your interest in contributing to the Claude Skills repository! We welcome new skills, improvements to existing skills, and bug fixes that enhance the Claude ecosystem.
+Thank you for your interest in contributing to the Claude Skills repository!
+We welcome new skills, improvements to existing skills, and bug fixes that enhance the Claude ecosystem.
 
 ## Ways to Contribute
 1. **Reporting Issues:** Found a bug in a skill? The output is unpredictable? Please open an issue.
@@ -8,21 +9,27 @@ Thank you for your interest in contributing to the Claude Skills repository! We 
 3. **Submitting New Skills:** Have a great workflow you use with Claude? Package it as a skill and share it!
 
 ## Anatomy of a Skill
-Every skill on this repository must be placed in its own directory and adhere to the Agent Skills standard:
+Every skill lives in its own directory under `skills/` and adheres to the Agent Skills standard:
 
 ```
-skill-name/          # Directory must be named after the skill (kebab-case)
-├── SKILL.md         # Required. The Claude prompt containing YAML frontmatter
-├── README.md        # Required. Instructions for human users on how to use it
+skills/
+└── skill-name/       # Directory must be named after the skill (kebab-case)
+    ├── SKILL.md      # Required. The Claude prompt containing YAML frontmatter
+    └── README.md     # Required. Instructions for human users on how to use it
 ```
 
-Check out the `_template/` folder in the root of the repository as a starting point.
+The `skills/` directory is the plugin's source.
+Anything you put there ships to everyone who installs the plugin, so nothing else belongs in it.
+The `_template/` folder sits outside `skills/` on purpose, which is what keeps it from installing as a real skill.
 
 ## Proposing a New Skill
 1. **Open an Issue:** Before spending time building out a complex skill or porting existing knowledge bases, open an Issue or Discussion to see if it aligns with the goals of this repo and isn't a duplicate.
-2. **Copy the Template:** Duplicate the `_template` folder and rename it to your skill idea.
+2. **Copy the Template:** Copy `_template/` into `skills/` and rename it to your skill idea.
 3. **Write the SKILL.md:** Include the required YAML frontmatter (with `name` and `description`). Write clear, structured instructions mapping out the behavioral adjustments or knowledge. Keep the instructions directed at the AI agent (Claude).
 4. **Write the README.md:** Write instructions directed at the human user explaining value propositon, trigger examples, and how it works under the hood.
+
+You do not need to register the skill anywhere.
+The plugin discovers every directory in `skills/` automatically, so `plugin.json` never has to change.
 
 ### The `SKILL.md` Frontmatter Requirement
 To ensure the skill imports cleanly into Claude.ai, your `SKILL.md` must start with the following YAML frontmatter:
@@ -34,11 +41,28 @@ description: Explicit trigger conditions and details stating exactly when Claude
 ---
 ```
 
+The `name` must match the directory name exactly.
+CI fails the build when they differ.
+
+## Validation
+Run these three checks before opening a PR.
+CI runs the same ones on every pull request.
+
+```bash
+claude plugin validate . --strict      # marketplace and plugin manifests
+claude plugin validate skills --strict # frontmatter of every skill
+python3 scripts/check_skill_names.py   # name matches directory, no orphan directories
+```
+
+The first two need the Claude Code CLI.
+The third needs only Python 3, with no packages to install.
+
 ## Pull Request Process
 1. Fork the repository and create your feature branch from `main`.
-2. Format your files, double checking that the YAML frontmatter uses proper markdown blocks in `SKILL.md`.
+2. Run the validation checks above and fix anything they report.
 3. Submit a Pull Request. Ensure the description clearly outlines the changes made and the problem the skill addresses.
 4. Wait for a review from the maintainers.
 
 ## Code of Conduct
-Please be respectful and patient when interacting in Issues and Pull Requests. All contributors are expected to uphold a welcoming and inclusive environment.
+Please be respectful and patient when interacting in Issues and Pull Requests.
+All contributors are expected to uphold a welcoming and inclusive environment.
