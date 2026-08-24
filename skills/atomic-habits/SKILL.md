@@ -1,6 +1,6 @@
 ---
 name: atomic-habits
-description: Design, diagnose, or repair a habit with the Atomic Habits framework. Use when someone wants to build a habit, quit a bad one, work out why a routine collapsed, push past boredom with a habit that stopped working, or turn a goal into a system.
+description: Design, diagnose, or repair a habit with the Atomic Habits framework, and return it as a written plan document. Use when someone wants to build a habit, quit a bad one, work out why a routine collapsed, push past boredom with a habit that stopped working, turn a goal into a system, or review and update a habit plan written earlier.
 ---
 
 # Atomic Habits
@@ -8,8 +8,9 @@ description: Design, diagnose, or repair a habit with the Atomic Habits framewor
 Habits are designed, not willed.
 Every habit runs the same four-stage **loop**, and every fix is a change to one stage of that loop.
 
-Your job is to find the broken stage and change it.
-A summary of the four laws is not the job.
+Your job is to find the broken stage and change it, then hand the user a plan they can reopen.
+A summary of the four laws is not the job, and neither is advice that lives only in the conversation.
+You get the specifics by asking, in short rounds, and the work ends in the document under **The plan document**.
 
 ## The loop and the four laws
 
@@ -23,12 +24,23 @@ A summary of the four laws is not the job.
 Building applies a law.
 Breaking applies its **inversion**: same loop, opposite direction.
 
-Everything below the procedure is reference.
-Work from the one section that matches the user's branch, and leave the other two alone:
+## Bundled files
 
-- Building a habit: **Reference: build a good habit**
-- Quitting a habit: **Reference: break a bad habit**
-- Habit already runs but has gone stale, boring, sloppy, or all-consuming: **Reference: sustain and advance**
+The techniques are not in this file.
+They sit in three reference files, one per branch.
+Read the one that matches the user's case and leave the other two unread, because reading all three costs context and buys nothing: the branches never apply at once.
+
+| The user wants to | Read |
+|---|---|
+| Build a habit | `references/build.md`, the four laws forward |
+| Quit a habit | `references/break.md`, the four laws inverted |
+| Fix a habit that already runs but has gone stale, boring, sloppy, or all-consuming | `references/sustain.md` |
+
+`references/example-plan.md` holds one filled plan and the three things a review changes in it.
+Read it at step 6, before writing a document.
+
+One case skips the procedure: a user who comes back with a plan written earlier.
+That one goes to **Update an existing plan**.
 
 ## Three frames that come before any technique
 
@@ -57,12 +69,24 @@ So decide who they want to be, then let small wins be the evidence.
 
 Work these in order.
 Each step names what must be true before you start the next one.
+Step 1 is the user's; steps 2 to 6 are yours, so never ask the user which stage is broken or which technique to apply.
 
-### 1. Get the specifics
+### 1. Interview in rounds
 
-Ask until you can state the user's loop in their own words: the cue that fires it, what they crave, what they do, and what they get **immediately** after.
+Ask in rounds of **at most three questions**, and wait for the answer before opening the next round.
+**Three rounds is the ceiling.**
+When the third round closes, or the moment the user asks for the plan, write it with what you have and record every gap under **Assumptions**.
 
-Done when all four stages hold the user's own details and the cue has a **time and a place**.
+| Round | What you are after |
+|---|---|
+| 1 | **The loop**: what fires it, at what time and in what place, what they do, and what they get **immediately** after. |
+| 2 | **The evidence**: what happened the last times it broke, and what their worst day looks like. |
+| 3 | **The stakes**: who they want to become, what they could enjoy right after the habit, and what the environment will not let them change. |
+
+Never ask what the user has already told you.
+A repeated question reads as not listening, and it spends a round you cannot get back.
+
+Done when the four stages hold the user's own details and the cue has a **time and a place**, or the ceiling is reached and the missing pieces are written down as assumptions.
 A cue you cannot put on a clock or a map is not a cue yet, it is a topic.
 
 ### 2. Name the broken stage
@@ -75,8 +99,9 @@ Done when one stage is named as the failure point and you have quoted the user's
 
 ### 3. Prescribe on that stage
 
-Go to the reference section for the user's branch and take techniques from the failing stage first.
-Name at most two per stage: a plan with ten moves is a reading list, not a plan.
+Read the reference file for the user's branch now, and take techniques from the failing stage first.
+Never prescribe from memory: the technique has to come from the file, or it comes out as a book summary.
+Name at most two per stage, because a plan with ten moves is a reading list, not a plan.
 Instantiate each one with the user's own cue, place, and reward.
 
 Done when every prescription is a change to environment, schedule, or wording that the user could make today, and none of them asks for more motivation.
@@ -88,305 +113,98 @@ The streak will break; what decides the outcome is the speed of return.
 
 Done when both are written out in the user's own terms, not as general advice.
 
-### 5. Close on identity
+### 5. Build the ladder
 
-Restate the plan as evidence for who they are becoming.
+Take the two-minute floor as rung zero and write the two or three rungs above it, using *Scale by stages* under the 3rd law in `references/build.md`.
 
-Done when the plan reads as "I am someone who...", not as a target to hit.
+Each rung carries the condition that unlocks it, and that condition is a **behaviour, never a date**.
+A date arrives whether or not the habit held, so a calendar promotes a habit that is already failing.
+
+Done when every rung reads "when [observable behaviour holds], I move to [next version]", and the top rung still sits short of the user's stated ambition.
+Leave room above the ladder: a ceiling reached is boredom scheduled.
+
+### 6. Write the plan
+
+Read `references/example-plan.md`, then fill in the template under **The plan document** and hand it over.
+Identity opens the document, so the rest reads as evidence rather than as a list of tasks.
+
+Write it to `habit-plan-<slug>.md` in the working directory when you can write files, and print it in the reply when you cannot.
+Say where it went.
+
+Done when every section of the template is filled with the user's own terms, and anything you supplied for them appears under **Assumptions** instead of passing as their answer.
+
+## The plan document
+
+The deliverable.
+One habit per plan.
+
+```markdown
+# Habit plan: <the habit, in the user's words>
+
+## Identity
+I am someone who <identity>.
+Each repetition is a vote for it.
+
+## The loop
+- **Cue**: <time> at <place>, after <anchor habit>
+- **Craving**: <what they are actually after>
+- **Response**: <the habit, exactly as it will be done>
+- **Reward**: <what lands immediately after>
+
+## The floor
+<the two-minute version>
+This is the version for the worst day, and it counts as a full repetition.
+
+## Techniques
+Broken stage: <stage>, because <the user's own words>.
+- **<technique>**: <instantiated with their cue, place, or reward>
+- **<technique>**: <instantiated with their cue, place, or reward>
+
+## The ladder
+| Rung | Version | Unlocks when |
+|---|---|---|
+| 0 | <the floor> | now |
+| 1 | <harder version> | <observable behaviour> |
+| 2 | <harder version> | <observable behaviour> |
+
+## Maintenance
+- **Never miss twice**: <what "twice" means for this habit>
+- **Metric**: <one representative measure>, which must not become the target itself
+- **Review**: <date>, against this document
+
+## Assumptions
+- <anything the user did not answer, written as what you assumed>
+
+## Log
+- <date>: plan written
+```
+
+Three things the template does not say on its own:
+
+- **Set the review date**: one week out for a new habit, one month out once a rung has held. A review with no date never happens, and a ladder nobody reviews never moves.
+- **On the breaking branch, two sections change meaning**: the floor becomes the smallest cut the user can hold on their worst day, and the ladder climbs by removing more, not by doing more.
+- **More than one habit**: plan the first and park the rest under a `## Waiting list` heading, each with the condition that starts it, which is the current habit held through one full review period. A document that details two habits at once breaks the law of least effort before the user has started.
+
+## Update an existing plan
+
+When the user returns with a plan, work from it.
+Rewriting it from scratch throws away the only record of what already held.
+The end of `references/example-plan.md` shows the three things a review changes and the one it does not.
+
+1. Read the document, then ask **one** round of at most three questions: what held, what broke, and what changed around them.
+2. Move on the ladder. One rung up when the current rung held through the review period. One rung **down** when it broke twice or more, plus one change to the failing stage. Pushing a rung that is already failing is how a habit dies.
+3. Add a rung on top whenever the ladder runs out, so there is always something above.
+4. Rewrite the same file. Keep the identity line unless the user changed it, clear the assumptions the round answered, and append one line to the log.
+
+Done when the document reflects the review and the ladder still has an unreached rung.
 
 ## Hard rules
 
+- Three questions per round, three rounds at most. A plan built from partial answers with the gaps written down beats a full interview the user walked out of.
+- Never present an assumption as the user's answer. What you filled in for them goes under **Assumptions**, where they can correct it.
+- One habit per plan, and one rung at a time. Two habits detailed at once is the same mistake as starting at rung two.
 - Instantiate every technique with the user's own cue, place, and reward. A technique named without their specifics is a summary, not advice.
 - Prescribe environment changes first, and reserve willpower for the gap the environment cannot close. **Friction** decides behaviour, not motivation.
 - Size the first version so it survives their worst day, not their best one.
 - When the subject is addiction, self-harm, or disordered eating, say plainly that this framework is not the right tool and point to a professional.
 
-## Reference: build a good habit
-
-The four laws in the forward direction, one section per stage of the loop.
-
-### 1st law: make it obvious (cue)
-
-Automatic means unexamined.
-An automated habit frees attention, which is the benefit, but it also stops being a decision, which is the risk.
-So the first move is awareness.
-
-> Until you make the unconscious conscious, it will direct your life and you will call it fate. (Jung)
-
-- **Habit scorecard**: list the day's automatic actions and mark each one `+`, `-`, or `=`. This is the starting point of any change.
-- **Pointing-and-calling**: say the cue out loud as it happens. Involving more senses drags the automatic back into the conscious.
-
-Once the habit is visible, make the cue impossible to miss.
-
-- **Implementation intention**: *I will [habit] at [time] in [place].* Clarity removes the hesitation that kills the habit.
-- **Habit stacking**: *After [current habit], I will [new habit].* An existing habit becomes the cue for the new one.
-
-#### Context outranks the cue
-
-A cue never fires alone, the surrounding context gives it meaning.
-A sore throat means one thing on waking and another after a night shouting at a match: same sensation, different reading.
-
-The practical consequence: design the environment and the good habit becomes the cheapest path.
-
-- Cookies on the counter get eaten; a big visible bowl of fruit gets eaten instead.
-- Games on the home screen get played; a reading or task app in that slot gets used.
-- A desk kept clear and used only for work gets associated with work, not with videos.
-
-Two ways to use this:
-
-- **Redesign the current space**: make the good cue visible, put the bad cue out of sight.
-- **Give a new habit a new space**: a running club, an unfamiliar room. With no competing associations, the habit starts clean.
-
-### 2nd law: make it attractive (craving)
-
-The more attractive a habit looks, the more likely it repeats.
-The lever is to borrow the mechanisms that already hook people.
-
-**Supernormal stimuli** are exaggerated versions of reality built to trigger outsized attraction, like junk food.
-A crisp is only a crisp, but the contrast between crunch and softness lights up the brain out of all proportion.
-The same mechanism can be pointed at a good habit.
-
-Underneath sits **dopamine**, released when an action produces a pleasurable result, which is why meeting the cue again pulls for a repeat.
-The spike arrives **before** the reward, on anticipation: seeing the burger, not biting it; Christmas Eve, not the presents.
-That anticipation is what actually drives execution, so attractiveness is not decoration.
-
-- **Temptation bundling**: pair something wanted (already dopaminergic) with something needed (the habit). Netflix only while on the exercise bike. Always put the need before the want.
-
-#### Other people set the default
-
-Most habits are inherited, not chosen.
-Culture, society, and the immediate circle install them, and they persist because "it is what everyone does".
-This is the real weight behind "you are the average of the people around you".
-
-Three groups get imitated:
-
-- **The close** (family and friends): copied through sheer proximity.
-- **The many** (the tribe): the herd gets followed because being slightly wrong but included beats being right and alone. Useful for where to eat or travel, and dangerous when belonging is the only reason.
-- **The powerful** (high status): imitated for their success or prestige.
-
-- **Join a tribe where the habit is already normal.** Shared behaviour becomes shared identity, and nothing binds like belonging.
-- **Use status.** People imitate first to fit in, then to stand out. A habit becomes irresistible when it promises a trait that carries prestige.
-
-#### Reprogram the craving
-
-No habit is attractive or unattractive in itself.
-What decides is the emotion attached to anticipating it, and that emotion can be rewritten.
-
-- **Reframe "have to" into "get to"**: same action, obligation becomes privilege. "I have to train" turns into "I get to train".
-- **Motivation ritual**: repeat one small fixed act immediately before the habit. With repetition the ritual itself triggers the state, so starting no longer depends on a good day.
-
-Both also work in reverse, to break a habit.
-
-### 3rd law: make it easy (response)
-
-Chasing a goal invites self-deception, because preparing to act looks a lot like acting.
-
-- **Motion is not action.** Motion is everything that gets you ready; action is the only thing that produces the result. Talking the routine through with a trainer is motion, and if the training never happens nothing moved.
-- Motion is comfortable: it feels like progress and it shields you from the judgement that comes from executing and failing.
-- **Frequency consolidates a habit, not duration.** It settles by being repeated more times, not by being given more time. Each repetition adds skill, skill lowers effort, and lower effort sustains the habit.
-
-#### The law of least effort
-
-Physics has the **principle of least action**: a body takes the path between two points that costs the least energy.
-Behaviour works the same way, so between routes to the same result, the cheapest one wins.
-
-**Friction decides, not motivation.**
-A habit repeats because it costs less than the alternative, so the lever is removing friction until compliance is the path of least resistance.
-
-- **Food**: keep healthy food ready in the fridge, so cooking collapses into taking it out.
-- **Work**: clear the desk when finishing, so next time starting is just sitting down.
-- **Tasks**: carry a pocket notebook so capture costs nothing.
-
-#### The two-minute rule
-
-Most of a day is habits, so habits decide whether the day goes well.
-They are also not independent: each action sets up the next one.
-
-Lie down on the bed and sleep follows; training almost never does.
-Put good habits as early in the day as possible, because each one opens the door to the next.
-A two-minute decision is barely felt in the moment and still sets the direction of everything after it.
-
-- **Two-minute rule**: do the habit for two minutes and stop. Two minutes carry no friction, so there is no excuse to skip them. What gets trained is not the outcome, it is the consistency; once showing up is reliable, extending is easy, and two minutes always beats zero.
-- **Scale by stages**: break a habit that cannot be held from day one into progressively harder sub-habits. Going vegan: fruit and vegetables at every meal, then drop four-legged meat, then two-legged, then milk and eggs.
-
-Tiny duration plus staged progression gets there sooner or later.
-
-#### Commitment devices
-
-A **commitment device** is an action taken now to control future behaviour.
-It runs both ways: it can force a good habit or block a bad one.
-
-**Decide once, not every day.**
-Resisting the same temptation daily drains; arranging the environment once does not.
-The device moves the decision to a calm moment and takes it away from the future self, who is the one that caves.
-
-- **A pantry with only good food**: nothing bad to pick at, so eating well happens by elimination.
-- **Social apps deleted from the phone**: opening one requires reinstalling it, and that extra step is usually enough.
-- **A paid class at a fixed time**: money and schedule are committed before the reluctance shows up.
-
-The strongest version needs no remembering at all: **automate it**.
-One action taken today that keeps paying every day after.
-
-- **Money**: standing transfer to savings or investments at the start of the month, and direct debits for bills. Saving happens without memory.
-- **Attention**: notifications silenced, newsletters unsubscribed, a site blocker on a schedule. The bad cue stops appearing on its own.
-- **Rest**: a good mattress or blackout curtains improve every night that follows.
-- **Food**: smaller plates, or a recurring grocery order. Eating improves with no calculation.
-
-**Automation cuts both ways.**
-Whatever makes a good habit effortless makes a bad one effortless too: the next episode that plays itself, the infinite scroll, one-click buying.
-Automate what should not need deciding, and audit what has been automated without ever being chosen.
-
-### 4th law: make it satisfying (reward)
-
-What is satisfying gets repeated; what is boring or painful gets avoided.
-With one qualifier that changes everything: the satisfaction has to be **immediate**.
-
-The brain formed roughly 200,000 years ago in an immediate-return environment where everything settled up on the spot: good was whatever paid now, bad was whatever hurt now.
-That wiring never caught up with a society that runs on delayed returns.
-
-| | Cost | Benefit |
-|---|---|---|
-| **Good habit** | Immediate | Long term |
-| **Bad habit** | Long term | Immediate |
-
-This is why the bad habit wins by default: it collects now and invoices later.
-The lever is not enduring more, it is pulling part of the future payoff into the present.
-
-- **Attach an immediate reward.** Months of gym are hard because the short term holds only fatigue and no visible change. Hook something enjoyable onto the end of the habit, like a massage after training, so it stops depending on a result that has not arrived.
-- **Keep the reward from fighting another goal.** Rewarding yourself with expensive massages while trying to save fixes one habit by breaking another. Choose rewards that reinforce the identity being built: if the goal is saving, the reward can be the transfer itself, so each repetition advances both directions at once.
-
-#### Tracking
-
-The easiest way to sustain a habit is to leave a trace of it.
-The record is itself the immediate reward the cardinal rule asks for, so there is nothing to wait for.
-
-- **Habit tracker**: a small, visually satisfying grid where each completed day gets marked. What hooks is not the result, it is watching the marks accumulate.
-- **The streak**: with time the chain outweighs the habit itself, and the aim shifts from wanting to train to not wanting to break the chain. The target becomes not losing a single day.
-- **Never miss twice**: the streak will break eventually and that cannot be prevented. What decides is the speed of return. Never two missed gym days in a row, never two broken diet days in a row.
-
-Tracking forces picking a number, and the number is never the whole habit.
-
-- **Goodhart's law**: when a measure becomes the target, it stops being a good measure. The number gets optimised and the thing it stood for gets abandoned.
-- **Pick representative metrics.** The easy things to count are steps taken, emails sent, revenue booked, pages read. Getting strong: weight rises just as well on a bad diet, so **muscle mass** represents it better. Getting healthy: steps say nothing about eating, so **food** has to be counted too.
-
-## Reference: break a bad habit
-
-The four laws inverted, one section per stage of the loop.
-
-### 1st law inverted: make it invisible (cue)
-
-A bad habit fires from a cue like any other.
-Most people reach for self-control instead, which works in the short term and then loses: fighting the same impulse over and over drains, and sooner or later it gives.
-
-**Habits are not forgotten.**
-However long the gap, meeting the old cue again reactivates the craving intact.
-The habit goes dormant, it does not get erased.
-Planning around "I am over it" is planning around something that is not true.
-
-- **Remove the cue.** Cutting exposure to the temptation is more practical than resisting it, so change what is in reach rather than trying to want it less.
-
-### 2nd law inverted: make it unattractive (craving)
-
-Every behaviour has two layers.
-
-- Underneath, the **underlying motive**: a basic human need such as eating, getting energy, resting, connecting, or reducing stress. This layer does not change.
-- On top, the **surface craving**: the particular way that need is being met today. This layer does change.
-
-**The surface craving is negotiable; the underlying motive is not.**
-Being hungry is the motive, wanting a burger is the craving.
-The need has to be met, the form does not, because one motive admits many different habits.
-That is the lever: do not try to remove the need, change the response to it.
-
-Given the same cue, some people give in and some do not, so the cue is not what decides.
-What triggers the habit is the **prediction** made in the instant before acting.
-
-**The craving is created by the emotion, not the fact.**
-That prediction is personal and emotional: the same cigarette disgusts one person and pleases another.
-A bad habit survives because the prediction says it will feel good, so changing the prediction changes the desire.
-
-- **Reprogram the prediction** with the reframe ("have to" into "get to") and the motivation ritual, both under *Reprogram the craving* in the 2nd law above. The same techniques serve either direction.
-
-### 3rd law inverted: make it hard (response)
-
-A bad habit persists because today it delivers satisfaction at an absurdly low price.
-Run the law of least effort backwards: once it stops being the most comfortable option, it stops winning by default.
-
-- **Put steps between the person and the behaviour**, so doing it costs more than not doing it.
-  - Leave the phone in another room during focused work.
-  - Put the television away in a cupboard.
-  - Carry no lighter for the cigarette.
-
-Taken to the extreme this becomes a **commitment device** (3rd law above): instead of raising the price of the behaviour, you block it in advance.
-
-### 4th law inverted: make it unsatisfying (reward)
-
-If a good habit survives because the reward lands immediately, a bad habit dies because the cost lands immediately.
-This is the cardinal rule read backwards, and it applies both to the bad habit committed and to the good habit skipped.
-
-**The penalty has to be immediate and big enough.**
-The bad habit wins by default because it collects today and invoices years later.
-A pain that arrives right after the failure corrects that mismatch.
-If it does not arrive now, or it arrives and does not hurt enough, the behaviour still pays.
-
-- **Habit contract**: write down what the person commits to and what penalty they accept for failing. Signing fixes the penalty before the temptation appears, exactly like a commitment device.
-- **Accountability partner**: someone who knows the commitment and watches it. Failing stops being private and starts costing on the spot.
-
-The partner works because it leans on **the many**: people would rather be slightly wrong and included than right and alone.
-Failing in front of someone is the most direct route out of the group, which is why it weighs far more than failing alone.
-
-## Reference: sustain and advance
-
-For a habit that already runs.
-The four laws install it; these three sections are what separates doing it well from doing it properly.
-
-### Pick the terrain: when genes matter
-
-People arrive with a genetic makeup that tilts them one way: more extroverted than introverted, more orderly than messy.
-It is not a surface preference, it is deep, and it decides how much each habit costs them.
-
-**Genes do not decide whether someone can, they decide where it comes cheap.**
-The same habit demands a different effort from different people, favouring some and working against others.
-So the useful question is not "do I have the discipline for this?" but "am I on the terrain where I play with an advantage?".
-
-- **Choose the ground where the advantage already exists.** Picking the right habit pays more than pushing harder on one that runs against the person's grain. Someone drawn to adventure and fantasy far more than science fiction will sustain a reading habit only by reading adventure and fantasy.
-
-This is the law of least effort applied one step earlier: not to setting the habit up, but to choosing which habit.
-
-### Keep it at medium difficulty: boredom, not difficulty
-
-Practice makes everything easier: the instrument gets played better, the game gets played better, the work gets handled better.
-That is where the real threat to a lasting habit shows up, and it is not difficulty, it is **boredom**.
-
-- **Raise the demand as the skill grows**, so the challenge always sits **just above** what is already mastered. Never impossible, which burns people out, and never comfortable, which bores them. Something is always being chased, and it is always reachable.
-
-This is the continuation of scaling by stages: the habit is installed at minimum effort, then sustained by raising the bar.
-
-### The downside of good habits
-
-#### Automatic also means inattentive
-
-The more a habit is repeated, the more automatic it gets and the less attention it receives.
-This is the same trade-off flagged at the start of the 1st law, now coming due: automation frees attention, and sometimes that attention was needed.
-
-Small errors slip in with the lost attention, and repetition locks them in.
-Tying shoelaces or brushing teeth does not care: the decision is trivial and a slip costs nothing.
-For a surgeon operating, the identical lapse is catastrophic.
-
-- **Build a periodic review.** Look back over performance at set intervals, to do two things at once:
-  - **Raise the target**, which keeps the difficulty up and boredom out.
-  - **Correct mid-course**, so the deadline arrives with the goal met instead of the drift discovered at the end.
-
-Reviewing needs something to review, so pair it with the habit tracker and the metric warnings in the 4th law.
-
-#### A narrow identity becomes a cage
-
-The second downside is not in execution, it is in the identity the habit builds.
-
-When a habit ends up occupying an enormous share of who someone believes they are, losing it leaves a void.
-This is what happens to ex-soldiers and ex-athletes: the title ends, and with it the answer to "who am I?".
-
-- **Define identity by values, not titles.** The title can end; the value underneath it cannot. So avoid attaching to any one specific identity.
-  - "I am the smart kid in class" becomes "I am someone who is intelligent and actively works at getting better".
-  - "I am a salesperson" becomes "I am someone who can spot what people need and solve it".
-
-This is the counterweight to identity-based change, not a retraction of it: keep the **vote** framing, and cast the votes for a value rather than for a label.

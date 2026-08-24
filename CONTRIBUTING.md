@@ -15,8 +15,13 @@ Every skill lives in its own directory under `skills/` and adheres to the Agent 
 skills/
 └── skill-name/       # Directory must be named after the skill (kebab-case)
     ├── SKILL.md      # Required. The Claude prompt containing YAML frontmatter
-    └── README.md     # Required. Instructions for human users on how to use it
+    ├── README.md     # Required. Instructions for human users on how to use it
+    └── references/   # Optional. Extra markdown the model reads only when it needs it
 ```
+
+Keep the body of `SKILL.md` under 5k tokens, which is the budget Anthropic documents for it.
+It loads in full every time the skill triggers, so anything that only one branch of the skill needs belongs in `references/` with an explicit instruction in `SKILL.md` telling the model when to read it.
+A reference file nobody is told to open never gets opened.
 
 The `skills/` directory is the plugin's source.
 Anything you put there ships to everyone who installs the plugin, so nothing else belongs in it.
