@@ -1,0 +1,158 @@
+<!doctype html>
+<!--
+  Skeleton for lessons/000N-<slug>.html. Copy it, do not link to it.
+
+  Rules that are not obvious from the markup:
+  1. Everything stays inline. No CDN, no web fonts, no build, no fetch. The page
+     has to open on a double click and still work in a year with no network.
+  2. The visible words follow the learner's language, the same as the lesson.
+     Set <html lang> to match, so a screen reader says them correctly. The file
+     name, the tag names, the class names and these comments stay English.
+  3. One idea per page. If you are laying out a second thing to look at, it is a
+     second page, or the node was really two nodes.
+  4. This page shows. It never grades. The check lives in the Markdown lesson.
+  5. Slots here use double curly braces, not the <angle brackets> the Markdown
+     templates use. A browser reads an unknown tag and renders nothing, with no
+     error, so an angle-bracket placeholder leaves a silent hole in the page.
+     Fill every slot. Delete this comment block when you copy the file.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{node}}</title>
+<style>
+  :root {
+    --bg: #fbfbf9;
+    --fg: #1b1b1a;
+    --muted: #63635e;
+    --line: #ddddd6;
+    --card: #ffffff;
+    --accent: #2e7d32;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16171a;
+      --fg: #e8e8e4;
+      --muted: #9a9a94;
+      --line: #2e3035;
+      --card: #1e2024;
+      --accent: #7fc784;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem 4rem;
+    background: var(--bg);
+    color: var(--fg);
+    font: 1rem/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 46rem; margin: 0 auto; }
+  .eyebrow {
+    color: var(--muted);
+    font-size: .8rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin: 0 0 .4rem;
+  }
+  h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 .5rem; }
+  .shows { color: var(--muted); margin: 0 0 2rem; }
+
+  /* The stage. Whatever the page exists to show goes in here. */
+  .stage {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: .5rem;
+    padding: 1.5rem;
+    overflow-x: auto;
+  }
+  .stage svg { max-width: 100%; height: auto; display: block; }
+
+  .caption { margin: 1rem 0 0; min-height: 3rem; }
+  .controls { display: flex; align-items: center; gap: .75rem; margin-top: 1rem; }
+  button {
+    font: inherit;
+    color: var(--fg);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: .375rem;
+    padding: .4rem .9rem;
+    cursor: pointer;
+  }
+  button:hover:not(:disabled) { border-color: var(--accent); }
+  button:disabled { opacity: .4; cursor: default; }
+  .counter { color: var(--muted); font-variant-numeric: tabular-nums; font-size: .9rem; }
+
+  footer { margin-top: 2.5rem; color: var(--muted); font-size: .9rem; }
+
+  @media print {
+    .controls { display: none; }
+    body { padding-top: 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Lesson {{000N}}</p>
+  <h1>{{node}}</h1>
+  <p class="shows">{{the one line saying what this shows that the text could not}}</p>
+
+  <div class="stage" id="stage"><!-- inline SVG, a grid of divs, a canvas --></div>
+
+  <p class="caption" id="caption" aria-live="polite"></p>
+
+  <div class="controls">
+    <button id="prev" type="button">Back</button>
+    <button id="next" type="button">Forward</button>
+    <span class="counter" id="counter"></span>
+  </div>
+
+  <footer>Predict what happens before you press Forward. Then go back to the lesson.</footer>
+</main>
+
+<script>
+  // Discrete frames. Use for movement and for state you step through.
+  // Each step paints the stage and says what changed. Delete if the page is a
+  // static shape, and swap for the knob pattern below if it is a knob.
+  const STEPS = [
+    { html: "<!-- frame 1 -->", caption: "What is true here, and why." },
+    { html: "<!-- frame 2 -->", caption: "What moved, and what caused it." }
+  ];
+
+  const stage = document.getElementById("stage");
+  const caption = document.getElementById("caption");
+  const counter = document.getElementById("counter");
+  const prev = document.getElementById("prev");
+  const next = document.getElementById("next");
+  let i = 0;
+
+  function render() {
+    stage.innerHTML = STEPS[i].html;
+    caption.textContent = STEPS[i].caption;
+    counter.textContent = (i + 1) + " / " + STEPS.length;
+    prev.disabled = i === 0;
+    next.disabled = i === STEPS.length - 1;
+  }
+
+  prev.addEventListener("click", () => { if (i > 0) { i--; render(); } });
+  next.addEventListener("click", () => { if (i < STEPS.length - 1) { i++; render(); } });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") prev.click();
+    if (e.key === "ArrowRight") next.click();
+  });
+
+  render();
+
+  /* The knob pattern, for a page built on one parameter instead of steps.
+     Replace the controls markup with:
+       <input type="range" id="knob" min="0" max="100" value="50">
+     and this script with:
+       const knob = document.getElementById("knob");
+       function draw(v) { stage.innerHTML = ...; caption.textContent = ...; }
+       knob.addEventListener("input", () => draw(Number(knob.value)));
+       draw(Number(knob.value));
+     Label the ends of the range. A slider with no units teaches nothing. */
+</script>
+</body>
+</html>

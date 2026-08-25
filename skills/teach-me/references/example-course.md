@@ -80,6 +80,9 @@ So a promise never waits behind a timer, and a chain of a thousand `.then()` cal
 starve a `setTimeout(0)` until the whole chain is done. That starvation is the bug
 you have been seeing in the payments backend.
 
+## Visual
+[The two queues draining, one tick at a time](0001-event-loop.html)
+
 ## Source
 [Jake Archibald, "In The Loop"](https://www.youtube.com/watch?v=cCOL7MC4Pl0): the queue ordering, shown live at 8:30.
 
@@ -94,6 +97,22 @@ Event loop: solid. Predicted an unseen case and gave the mechanism, not the answ
 
 The check is probe 2, prediction, and it was built from a case the explanation did not walk through.
 Had it re-asked the exact example from the text, it would have measured reading, not understanding.
+
+---
+
+## Why this node earned a page
+
+`lessons/0001-event-loop.html` exists because the node is **something that moves**, and the prose above has to
+say in three paragraphs what one tick of the loop does in an instant.
+Six steps, forward and back: script running, microtasks draining to empty, one task taken, microtasks draining again.
+The learner presses Forward and watches the timer sit there while the promises go.
+
+Two things the page is not.
+It does not repeat the explanation with better type, and it does not ask the question.
+The check stayed in the Markdown, so what moved `Event loop` to `solid` is still a sentence the learner produced.
+
+`Promises` would not have earned a page.
+Chaining is a rule about return values, and a rule is exactly the thing prose is already good at.
 
 ---
 

@@ -1,6 +1,8 @@
 ---
 name: teach-me
 description: Teach a subject one to one across sessions, in a workspace that remembers what the learner already holds. Use when someone wants to be taught or tutored, wants a study plan or roadmap for a topic, wants their level probed before studying, wants to be quizzed on what they know, or returns to a course started earlier. Not for a single factual answer.
+disable-model-invocation: true
+argument-hint: "What do you want to learn, or which course do you want to reopen?"
 ---
 
 # Teach Me
@@ -15,13 +17,14 @@ An explanation that lives only in the conversation is not the job.
 
 ## The workspace
 
-Three artifacts, split by how often they change.
+Three artifacts, split by how often they change, and one that appears only when a node earns it.
 
 | Phase | Artifact | Changes |
 |---|---|---|
 | 1. Triage | `COURSE.md` | Almost never. Only when the goal moves |
 | 2. Map | `MAP.md` | Every session |
 | 3. Teach | `lessons/0001-<slug>.md` | Append only |
+| 3. Teach | `lessons/0001-<slug>.html` | Append only, and only when the node has something to show |
 
 The result of the triage does **not** go in `COURSE.md`.
 It goes straight into `MAP.md` as node state.
@@ -42,10 +45,16 @@ A Spanish learner gets a file called `MAP.md`, with `## Map` as the heading, hol
 Node labels are the exception on both sides: use the term the learner will actually meet in the field.
 That is usually the English term of art, even for a learner working in another language.
 
+A visual page follows the same split.
+The file name and the HTML tags are English, every word on the screen is the learner's language, and `<html lang>` says which one.
+
 ## Bundled files
 
 `references/example-course.md` holds one worked course with all three artifacts filled in.
 Read it in step 2, before you draw a map for the first time.
+
+`references/lesson-template.html` holds the skeleton every visual page starts from.
+Read it in step 3, before you write the first page of a course, and not again after that.
 
 ## Procedure
 
@@ -103,15 +112,63 @@ Teach the knowledge with the difficulty turned **down**.
 Working memory is small, and every gratuitous obstacle is memory the learner cannot spend on understanding.
 Explain the way `COURSE.md` says to explain.
 
+If the node holds something prose cannot show, build the page too, under **The visual complement**.
+Most nodes do not, and that is the expected answer.
+
 Ground it in a real source and link it.
 Teaching from your own memory alone is how confident errors reach the learner.
 
 Then turn the difficulty **up** and test, under **Proving it stuck**.
 Effortful retrieval is what makes it last; a smooth explanation the learner nodded at does not.
 
-Write the lesson to `lessons/000N-<slug>.md`, question and answer included, then update `MAP.md`.
+Write the lesson to `lessons/000N-<slug>.md`, question and answer included, and the page beside it if the node earned one.
+Then update `MAP.md`.
 
 Done when the node's state in `MAP.md` is backed by something the learner produced, and the lesson file exists.
+
+## The visual complement
+
+Some things do not survive being written down.
+A mechanism with parts that move, a state you have to walk through, a value you have to change to see what it does.
+For those, and only for those, the lesson gets a second file next to it: `lessons/000N-<slug>.html`.
+
+The two files are complementary and they do different jobs.
+**The Markdown is the lesson.** It explains, it cites, it holds the check and the verdict, and `MAP.md` reads its evidence.
+**The page shows one thing the Markdown cannot say**, and nothing else.
+
+### When a node earns a page
+
+Build it when the node holds one of these:
+
+- **Something that moves.** Two queues draining at different rates, a packet crossing a network, a sort in progress.
+- **State to step through.** A machine and its transitions, a stack growing and unwinding, a recursion opening and closing.
+- **A knob.** One parameter the learner changes to watch the output change. This is the strongest case of the four, because turning it is faster than reading about it.
+- **A shape.** A geometry, a memory layout, a graph, a waveform, anything spatial.
+
+Skip it for a definition, a rule, a comparison, a convention or a piece of history.
+**The default is no page.**
+If you cannot say in one line what it shows that the paragraph above it does not, you have not found a reason, you have found a habit.
+A page that only restyles the text it sits next to costs a file and teaches nothing.
+
+### What the page has to be
+
+- **One file, no dependencies.** CSS and JavaScript inline. No CDN, no web fonts, no build step, no server. It opens on a double click and it still works in a year with no network.
+- **Opened for the learner.** After you write it, open it: `open` on macOS, `xdg-open` on Linux, `start` on Windows. A file they have to go and find is a file they do not read.
+- **Linked from the lesson**, under `## Visual`, so the Markdown is the one door into the whole lesson.
+- **Small enough to take in at once.** One idea per page, the same rule as one node per lesson. Two things to look at is two pages, or it is a sign the node is really two nodes.
+
+### What the page must not be
+
+- **Not the test.** It shows, it does not grade. The check stays in the Markdown, because a clickable answer is recognition, and recognition is the illusion this skill exists to break. A page may invite the learner to predict before they press the button; the verdict is still yours, in the conversation.
+- **Not a prerequisite.** Write the explanation so a learner who never opens the page still gets the node. If the lesson stops making sense without it, the page has quietly become the lesson.
+- **Not a rewrite of the text.** If it repeats the explanation with nicer type, delete it.
+
+Read `references/lesson-template.html` before the first page of a course and copy its skeleton.
+A self-contained file cannot share a stylesheet, so the template is the only thing making the pages look like one course instead of a pile of one-offs.
+
+Never leave an angle-bracket placeholder in the page.
+A browser reads `<node>` as an unknown tag and renders nothing, with no error to warn you, which is the same trap as angle brackets in a Mermaid label.
+The template marks its slots with `{{double braces}}` for that reason, and every one of them has to be filled before the page is written.
 
 ## Proving it stuck
 
@@ -187,6 +244,9 @@ Three things the template does not say on its own:
 
 <the explanation, in their preferred style>
 
+## Visual
+[<what it shows>](000N-<slug>.html)
+
 ## Source
 [<title>](<url>): <what it covers>
 
@@ -198,6 +258,15 @@ Three things the template does not say on its own:
 ## Result
 <node>: <solid | still weak, and why>
 ```
+
+`## Visual` is the only optional section, and it is absent from most lessons.
+It carries a relative link, never an absolute path, so the course still works after the folder is moved or shared.
+
+### `lessons/000N-<slug>.html`
+
+Only when the node earned it, under **The visual complement**.
+The skeleton is `references/lesson-template.html`.
+Same number and same slug as the lesson it belongs to, so the pair sorts together and neither can be orphaned.
 
 ## Returning to a course
 
@@ -216,6 +285,9 @@ Re-teaching something already marked solid is the one failure that makes a tutor
 - Never mark a node solid on self-report. The learner has to produce something.
 - Difficulty down while teaching, up while testing. Reversing this is the most common way to make a lesson feel rigorous and teach nothing.
 - Cite a source in every lesson. Never teach a topic entirely from your own recall.
+- A page only when the node holds movement, state, a knob or a shape. The default is no page, and "it would look good" is none of the four.
+- The page shows and the Markdown tests. The check never moves into the browser, because a clickable answer is recognition.
+- Every page is one self-contained file, no network and no build, opened for the learner. The lesson still teaches the node when the page is never opened.
 - State lives in the graph, evidence lives in the list, and the frontier lives in neither.
 - Twenty five nodes is a course. More than that is two courses.
 - File names, directory name, headings and Mermaid keywords are always English, exactly as written here. Only what the learner reads follows their language.
