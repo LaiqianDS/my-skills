@@ -11,6 +11,7 @@ Each skill teaches Claude a repeatable workflow, whether that's writing high-con
 |-------|-------------|
 | [atomic-habits](./skills/atomic-habits/) | Design, diagnose, or repair a habit with the Atomic Habits framework. Finds the broken stage of the habit loop before prescribing, and answers with environment changes rather than willpower. |
 | [cold-email](./skills/cold-email/) | Generate cold emails, DMs, and follow-up sequences with a proven 40%+ reply rate framework. Handles B2B outreach, investor emails, job pitches, scholarship asks, and networking. |
+| [teach-me](./skills/teach-me/) | Teach a subject one to one across sessions. Probes what you already hold, maps the subject as a dependency graph, then teaches one node at a time and makes you prove it stuck. |
 
 ## Installation
 
@@ -53,7 +54,8 @@ laiqiands-skills/
 │   └── plugin.json        # Plugin manifest. Skills are auto-discovered from skills/
 ├── skills/                # One directory per skill. Everything here ships.
 │   ├── atomic-habits/
-│   └── cold-email/
+│   ├── cold-email/
+│   └── teach-me/
 └── _template/             # Starting point for a new skill. Not installed.
 ```
 
